@@ -113,6 +113,6 @@ class MemberExternalServiceTest {
                 () -> memberExternalService.findEntityById(99L)
         );
 
-        assertEquals("Membro nÃ£o encontrado com id: 99", exception.getMessage());
+        assertEquals("Membro não encontrado com id: 99", exception.getMessage());
     }
 }

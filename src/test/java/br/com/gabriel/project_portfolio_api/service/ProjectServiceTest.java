@@ -159,7 +159,7 @@ class ProjectServiceTest {
                 () -> projectService.create(request)
         );
 
-        assertEquals("A data real de tÃ©rmino nÃ£o pode ser anterior Ã  data de inÃ­cio", exception.getMessage());
+        assertEquals("A data real de término não pode ser anterior à data de início", exception.getMessage());
 
         verifyNoInteractions(memberExternalService);
         verifyNoInteractions(projectRepository);
@@ -172,7 +172,7 @@ class ProjectServiceTest {
         ProjectResponse response = projectService.findById(1L);
 
         assertEquals(1L, response.id());
-        assertEquals("Sistema de GestÃ£o", response.name());
+        assertEquals(project.getName(), response.name());
         assertEquals(RiskClassification.MEDIO, response.riskClassification());
     }
 
@@ -185,7 +185,7 @@ class ProjectServiceTest {
                 () -> projectService.findEntityById(99L)
         );
 
-        assertEquals("Projeto nÃ£o encontrado com id: 99", exception.getMessage());
+        assertEquals("Projeto não encontrado com id: 99", exception.getMessage());
     }
 
     @Test
@@ -193,12 +193,12 @@ class ProjectServiceTest {
         ProjectFilterRequest filter = new ProjectFilterRequest(null, null, null, null, null);
         PageRequest pageable = PageRequest.of(0, 10);
 
-        when(projectRepository.findAll(any(Specification.class), eq(pageable))).thenReturn(new PageImpl<>(List.of(project)));
+        when(projectRepository.findAll(anySpecification(), eq(pageable))).thenReturn(new PageImpl<>(List.of(project)));
 
         Page<ProjectResponse> response = projectService.findAll(filter, pageable);
 
         assertEquals(1, response.getTotalElements());
-        assertEquals("Sistema de GestÃ£o", response.getContent().get(0).name());
+        assertEquals(project.getName(), response.getContent().get(0).name());
     }
 
     @Test
@@ -219,7 +219,7 @@ class ProjectServiceTest {
         ProjectFilterRequest filter = new ProjectFilterRequest(null, null, null, null, RiskClassification.BAIXO);
         PageRequest pageable = PageRequest.of(0, 10);
 
-        when(projectRepository.findAll(any(Specification.class), eq(pageable))).thenReturn(new PageImpl<>(List.of(project, lowRiskProject)));
+        when(projectRepository.findAll(anySpecification(), eq(pageable))).thenReturn(new PageImpl<>(List.of(project, lowRiskProject)));
 
         Page<ProjectResponse> response = projectService.findAll(filter, pageable);
 
@@ -328,5 +328,9 @@ class ProjectServiceTest {
 
         verify(projectRepository).findById(1L);
         verify(projectRepository).delete(project);
+    }
+
+    private Specification<Project> anySpecification() {
+        return any();
     }
 }

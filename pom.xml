@@ -175,6 +175,16 @@
 						<configuration>
 							<rules>
 								<rule>
+									<element>BUNDLE</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.90</minimum>
+										</limit>
+									</limits>
+								</rule>
+								<rule>
 									<element>PACKAGE</element>
 									<includes>
 										<include>br.com.gabriel.project_portfolio_api.service</include>
