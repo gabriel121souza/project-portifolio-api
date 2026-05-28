@@ -1,0 +1,587 @@
+{
+  "info": {
+    "_postman_id": "f815fdb7-c054-4ae7-9ab2-6297574c177d",
+    "name": "Project Portfolio API",
+    "description": "Coleção para testar a API de gerenciamento de portfólio de projetos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "External Members",
+      "item": [
+        {
+          "name": "Create Manager",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201 || pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('managerId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "feecaa6a-3533-46e6-a710-0abcd51cdf1f"
+              }
+            }
+          ],
+          "id": "6f6ee18c-b97f-4571-98e0-77e76b99bad7",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ana Souza\",\n  \"role\": \"GERENTE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/external-api/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "external-api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Employee",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201 || pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('memberId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "f7a920ac-6dfd-4f79-bc8b-223cea63229a"
+              }
+            }
+          ],
+          "id": "ad1fe691-8f2b-477c-b38a-35cb938fe2f5",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Carlos Lima\",\n  \"role\": \"FUNCIONARIO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/external-api/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "external-api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Members",
+          "id": "673d6e91-742c-40c4-987e-1e93a70b4dae",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/external-api/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "external-api",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find Member By Id",
+          "id": "370516e4-adfa-43cf-8348-7668467bb2fb",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/external-api/members/{{memberId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "external-api",
+                "members",
+                "{{memberId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e0ced773-8ded-4501-9487-deba732956c1"
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Create Project",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201 || pm.response.code === 200) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('projectId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "id": "5a4c5a3d-607e-42f4-9e42-611d789007e8"
+              }
+            }
+          ],
+          "id": "521b8bdf-3c68-4e28-8e5e-d2f79d0d8483",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sistema de Gestão de Portfólio\",\n  \"startDate\": \"2026-06-01\",\n  \"expectedEndDate\": \"2026-10-01\",\n  \"actualEndDate\": null,\n  \"totalBudget\": 250000.0,\n  \"description\": \"Projeto para controle de portfólio corporativo com relatórios gerenciais.\",\n  \"managerId\": \"{{managerId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Projects",
+          "id": "f9788d5e-06c1-4aca-844a-4c79ae3742dd",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects?page=0&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Projects With Filters",
+          "id": "eb78d1a7-c00b-4fa5-91d0-33275d29c144",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects?name=gestão&status=EM_ANALISE&managerId={{managerId}}&riskClassification=MEDIO&page=0&size=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "gestão"
+                },
+                {
+                  "key": "status",
+                  "value": "EM_ANALISE"
+                },
+                {
+                  "key": "managerId",
+                  "value": "{{managerId}}"
+                },
+                {
+                  "key": "riskClassification",
+                  "value": "MEDIO"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "key": "size",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Find Project By Id",
+          "id": "9affcbfe-b406-4602-aa67-b73f2b4229f6",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Project",
+          "id": "86aa44c2-bc81-4db3-bafd-dd345fd27d27",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sistema de Gestão de Portfólio Atualizado\",\n  \"startDate\": \"2026-06-01\",\n  \"expectedEndDate\": \"2026-12-15\",\n  \"actualEndDate\": null,\n  \"totalBudget\": 250000.0,\n  \"description\": \"Projeto atualizado para controle de portfólio corporativo com relatórios gerenciais.\",\n  \"managerId\": \"{{managerId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status - Next Step",
+          "id": "354710c7-1ebd-4e03-ae25-3f5753ec6d11",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"ANALISE_REALIZADA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status - Cancel",
+          "id": "fd047f37-bfa3-4aa6-ba60-8e1f2d8c657d",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CANCELADO\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Project",
+          "id": "64735ee6-fe83-4cc9-b731-03876221aa1a",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "2175c491-f5b3-4b72-814f-648ba0072e12"
+    },
+    {
+      "name": "Project Members",
+      "item": [
+        {
+          "name": "Add Member To Project",
+          "id": "665dad9e-43a1-4cf3-a8a0-61d7e4c1ca24",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"{{memberId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Project Members",
+          "id": "c16c50de-70bc-49a3-bd97-8730ef1111d5",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Member From Project",
+          "id": "756c6d92-3d43-496f-ad6f-fc5834ca4083",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/members/{{memberId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "members",
+                "{{memberId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Error - Add Manager As Project Member",
+          "id": "b0f0fcfe-df30-4626-ae12-a26315c50325",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberId\": \"{{managerId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/{{projectId}}/members",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "{{projectId}}",
+                "members"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "044b590d-cd91-4658-98fa-7b5becd642a2"
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Portfolio Summary",
+          "id": "2d037529-2e39-4187-b61d-0ae62976100a",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/portfolio-summary",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "portfolio-summary"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3623419b-e566-41c4-b0f7-1c1e5a294aa7"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "id": "8f39e2d6-d363-46f6-aa69-48a2c133be9d",
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "id": "05d9afc7-e127-4b05-a88c-65b7973205cb",
+      "key": "username",
+      "value": "portfolio_user"
+    },
+    {
+      "id": "72d1a8b3-bc18-4fea-9750-133afad89cd7",
+      "key": "password",
+      "value": "portfolio123"
+    },
+    {
+      "id": "304f87cc-ab15-4149-b277-12e58359f404",
+      "key": "managerId",
+      "value": "1"
+    },
+    {
+      "id": "86a9738b-da75-43fb-8465-7105623f95fb",
+      "key": "memberId",
+      "value": "2"
+    },
+    {
+      "id": "8c5e976a-9d1b-4284-8e18-d78530a5ad6c",
+      "key": "projectId",
+      "value": "1"
+    }
+  ]
+}
